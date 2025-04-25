@@ -204,7 +204,8 @@ http://localhost:5173
 ## 👤 Desenvolvedores
 
 - David Martins  
-- Eduarda Burity Gonçalves  
+- Eduarda Burity Gonçalves
+- Gabriel de Barros Sampaio   
 - Gustavo Ferraz Carvalho  
 - Guilherme de Souza França
 
