@@ -1,17 +1,44 @@
-# 📦 Avanti Bootcamp - Achados e Perdidos API
+# 📦 F7nder - Achados e Perdidos | Avanti Bootcamp 
 
-Este projeto é uma API RESTful desenvolvida como parte de um bootcamp, com o objetivo de gerenciar objetos perdidos e encontrados em um ambiente como escolas, empresas ou eventos.  
-Atualmente, o projeto consiste apenas no backend utilizando Node.js, Express e Prisma ORM com banco de dados PostgreSQL.
+Este projeto é um sistema completo de Achados e Perdidos desenvolvido como parte do Avanti Bootcamp. O sistema é composto por:
 
-## 🚀 Tecnologias utilizadas
+- Uma **API RESTful** (backend) com Node.js, Express e PostgreSQL
+- Uma **interface web** (frontend) com React, Vite e TailwindCSS
+
+O objetivo do sistema é gerenciar objetos perdidos e encontrados em ambientes como escolas, empresas ou eventos.
+
+---
+
+## 🧠 Funcionalidades principais
+
+- Cadastro e gerenciamento de usuários
+- Registro de itens perdidos ou encontrados
+- Consulta e busca de itens por status, categoria ou código de acesso
+- Atualização e exclusão de dados
+- Interface web intuitiva para facilitar o uso
+
+---
+
+## 🖥️ Tecnologias Utilizadas
+
+### Backend
 
 - Node.js
 - Express
 - Prisma ORM
 - PostgreSQL
-- DBeaver (como cliente de banco de dados)
+- Nodemon (modo dev)
+- DBeaver (cliente de banco de dados)
+
+### Frontend
+
+- React
+- Vite
+- TailwindCSS
+- JavaScript (ES6+)
 - VS Code
-- Nodemon (em desenvolvimento)
+
+---
 
 ## 📁 Clonando o projeto
 
@@ -20,26 +47,19 @@ git clone https://github.com/davidbrennerm/avanti-bootcamp-dfs.git
 cd avanti-bootcamp-dfs
 ```
 
-### 📦 Dependências principais
+---
 
-| Pacote           | Descrição                                                                 |
-|------------------|---------------------------------------------------------------------------|
-| **express**      | Framework web leve e flexível para APIs                                   |
-| **cors**         | Middleware para liberação de requisições externas (CORS)                  |
-| **prisma**       | ORM moderno e eficiente para trabalhar com PostgreSQL                     |
-| **@prisma/client**| Cliente Prisma gerado automaticamente com base no schema                |
-| **pg**           | Driver PostgreSQL para Node.js                                            |
-| **nanoid**       | Gerador de identificadores únicos curtos (código de acesso)               |
+## 🔧 Backend
 
-## 📦 Instalando dependências
+### 📦 Instalando as dependências
 
 ```bash
 npm install
 ```
 
-## 🔐 Configuração do `.env`
+### 🔐 Configuração do `.env`
 
-Crie um arquivo `.env` na raiz do projeto com a seguinte variável:
+Crie um arquivo `.env` na raiz do projeto com o seguinte conteúdo:
 
 ```
 DATABASE_URL="postgresql://<usuario>:<senha>@localhost:5432/perdidos_encontrados_db"
@@ -47,48 +67,39 @@ DATABASE_URL="postgresql://<usuario>:<senha>@localhost:5432/perdidos_encontrados
 
 Substitua `<usuario>` e `<senha>` pelas suas credenciais do PostgreSQL.
 
-Exemplo realista:
+Exemplo:
 
 ```
 DATABASE_URL="postgresql://postgres:root@localhost:5432/perdidos_encontrados_db"
 ```
 
-## 🧱 Criando o banco de dados
+### 🧱 Criando o banco de dados
 
-Certifique-se de que o PostgreSQL está rodando e o banco `perdidos_encontrados_db` foi criado corretamente.
-
-Você pode usar o DBeaver ou executar diretamente no terminal:
+Certifique-se de que o PostgreSQL está rodando e crie o banco:
 
 ```sql
 CREATE DATABASE perdidos_encontrados_db;
 ```
 
-Em seguida, aplique as migrações:
+### ⚙️ Rodando as migrações
 
 ```bash
 npx prisma migrate dev
-```
-
-E gere o cliente Prisma:
-
-```bash
 npx prisma generate
 ```
 
-## ▶️ Rodando o servidor
+### ▶️ Rodando o servidor
 
 ```bash
 npm run seed
 npm run dev
 ```
 
-Se tudo estiver correto, você verá a seguinte mensagem:
+Servidor iniciado em: `http://localhost:3000`
 
-```
-Servidor rodando em http://localhost:3000
-```
+---
 
-## 📌 Exemplos de JSON
+## 🧪 Exemplos de JSON
 
 ### 👤 Usuário
 
@@ -114,6 +125,8 @@ Servidor rodando em http://localhost:3000
 }
 ```
 
+---
+
 ## 🛠 Endpoints principais
 
 ### Usuário
@@ -125,24 +138,76 @@ Servidor rodando em http://localhost:3000
 
 ### Item
 
-- `GET /itens` – Listar itens
-- `GET /itens/perdidos` – Listar apenas itens com status `0`
-- `GET /itens/achados` – Listar apenas itens com status `1`
-- `GET /itens/codigo/:codigoacesso` – Buscar item por código
-- `POST /itens` – Cadastrar item (gera código de acesso automaticamente)
-- `PUT /itens/:id` – Atualiza as informações de um item pelo ID
-- `PUT /itens/codigo/:codigoacesso` – Atualizar item via código de acesso
-- `DELETE /itens/:id` – Deleta um item pelo ID
-- `DELETE /itens/codigo/:codigoacesso` – Deleta item via código de acesso
+- `GET /itens` – Lista todos os itens
+- `GET /itens/perdidos` – Lista apenas itens com status `0`
+- `GET /itens/achados` – Lista apenas itens com status `1`
+- `GET /itens/codigo/:codigoacesso` – Busca item por código
+- `POST /itens` – Cadastra item (gera código de acesso automaticamente)
+- `PUT /itens/:id` – Atualiza item pelo ID
+- `PUT /itens/codigo/:codigoacesso` – Atualiza item via código
+- `DELETE /itens/:id` – Deleta item pelo ID
+- `DELETE /itens/codigo/:codigoacesso` – Deleta item via código
+
+---
+
+## 🎨 Frontend React (Vite + Tailwind)
+
+A aplicação conta também com uma interface web para facilitar o uso do sistema.
+
+### 📁 Estrutura do frontend
+
+O frontend está localizado na pasta `frontend/`.
+
+```
+frontend/
+├── public/
+├── src/
+│   ├── assets/
+│   ├── components/
+│   ├── pages/
+│   ├── App.jsx
+│   ├── main.jsx
+│   ├── index.css
+├── tailwind.config.js
+├── vite.config.js
+```
+
+### 📦 Instalando as dependências do frontend
+
+```bash
+cd frontend
+npm install
+```
+
+### ▶️ Rodando o frontend
+
+```bash
+npm run dev
+```
+
+A aplicação estará disponível em:
+
+```
+http://localhost:5173
+```
+
+---
+
+## 🌐 Integração com backend
+
+- O backend está configurado para rodar em `http://localhost:3000`
+- As requisições da interface consomem os endpoints da API diretamente
+- Caso precise configurar CORS ou usar um **proxy** com Vite, edite o arquivo `vite.config.js`
+
+---
 
 ## 👤 Desenvolvedores
 
-- David Martins
-
-- Eduarda Burity Gonçalves
-
-- Gustavo Ferraz Carvalho
-
+- David Martins  
+- Eduarda Burity Gonçalves  
+- Gustavo Ferraz Carvalho  
 - Guilherme de Souza França
-  
-> Rotas e funcionalidades podem ser expandidas à medida que o projeto evolui.
+
+---
+
+> Este projeto está em constante evolução. Contribuições e sugestões são bem-vindas!
